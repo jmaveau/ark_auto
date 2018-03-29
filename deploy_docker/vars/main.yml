@@ -1,0 +1,7 @@
+---
+# vars file for deploy_docker
+dback_image: "mawo/ansible-centos-nodejs"
+dback_folder: "/home/mawo/docker/backend/"
+dback_container: "Ark_ansible"
+
+serverark: "/home/mawo/volumes/backend/src/"

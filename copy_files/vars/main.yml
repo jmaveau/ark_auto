@@ -1,0 +1,14 @@
+---
+# defaults file for maj_UI
+localark: "/home/mawo/Desktop/Ecole/TP_nodejs/Ark/"
+serverark: "/home/mawo/volumes/backend/src/"
+dback_folder: "/home/mawo/docker/backend/"
+back_node: { sourceark: "{{ localark }}server/", destinationark: "{{ serverark }}server/" }
+front_node: 
+  - { sourceark: "{{ localark }}public/index.html", destinationark: "{{ serverark }}public/" }
+  - { sourceark: "{{ localark }}public/elements/", destinationark: "{{ serverark }}public/elements/"}
+config_node: 
+  - { sourceark: '{{ localark }}bower.json', destinationark: '{{ dback_folder }}src/' }
+  - { sourceark: '{{ localark }}package.json', destinationark: '{{ dback_folder }}src/' }
+  - { sourceark: '{{ localark }}.bowerrc', destinationark: '{{ dback_folder }}src/' }
+

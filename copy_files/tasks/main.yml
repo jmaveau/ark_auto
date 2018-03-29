@@ -1,0 +1,40 @@
+---
+# tasks file for maj_UI
+- name: COPY nodejs backUI for website.
+  copy:
+    src: "{{ item.sourceark }}"
+    dest: "{{ item.destinationark }}"
+    owner: mawo
+    group: mawo
+    mode: 0644
+    # force: yes
+  with_items: 
+    - "{{ back_node }}"
+  tags:
+    - backUI
+
+- name: COPY nodejs frontUI for website.
+  copy:
+    src: "{{ item.sourceark }}"
+    dest: "{{ item.destinationark }}"
+    owner: mawo
+    group: mawo
+    mode: 0644
+    # force: yes
+  with_items: 
+    - "{{ front_node }}"
+  tags:
+    - frontUI
+
+- name: COPY nodejs Config for website.
+  copy:
+    src: "{{ item.sourceark }}"
+    dest: "{{ item.destinationark }}"
+    owner: mawo
+    group: mawo
+    mode: 0644
+    # force: yes
+  with_items: 
+    - "{{ config_node }}"
+  tags:
+    - config

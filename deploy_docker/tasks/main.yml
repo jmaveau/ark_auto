@@ -1,0 +1,59 @@
+---
+# tasks file for deploy_docker
+- name: Remove nodejs image.
+  docker_image:
+    name: "{{ dback_image }}"
+    state: absent
+  tags:
+    - backUI
+# when it's present
+
+- name: Build nodejs image.
+  docker_image:
+    name: "{{ dback_image }}"
+    path: "{{ dback_folder }}"
+    force: yes
+    state: present
+  tags:
+    - backUI
+
+- name: Stop nodejs docker.
+  docker_container:
+    name: "{{ dback_container }}"
+    state: stopped
+  tags:
+    - backUI
+# maybe add rm nodejs docker
+
+- name: Run nodejs docker.
+  docker_container:
+    name: "{{ dback_container }}"
+    image: "{{ dback_image }}"
+    ports:
+      - "8080:3000"
+    volumes:
+      - "{{ serverark }}server/:/opt/src/server:ro"
+      - "{{ serverark }}public/elements/:/opt/src/public/elements:ro"
+  tags:
+    - backUI
+
+- name: Restart nodejs docker.
+  docker_container:
+    name: "{{ dback_container }}" # need maybe image: and state:
+    restart: yes
+  tags:
+    - config
+
+#TODO :
+# RM nodejs docker but maybe at the end to go_back if needed
+#
+# add tag to select what to do
+# ansible-playbook main.yml --tags "backUI"
+# ansible-playbook main.yml --skip-tags "config"
+# launch docker build
+
+#- name: Run ls.sh and output "ls /"
+#script: ls.sh
+#register: out
+#
+#- debug: var=out.stdout_lines
